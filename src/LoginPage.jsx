@@ -14,6 +14,7 @@ import MuiAlert from "@mui/material/Alert";
 import Checkbox from "@mui/material/Checkbox";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
+import {LoginSocialGoogle} from "reactjs-social-login"
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -48,7 +49,7 @@ export const LoginPage = () => {
   const { handleSubmit, handleChange, handleBlur, values, touched, errors } =
     useFormik({
       initialValues: {
-        email: "test@123.com",
+        email: "test@12345.com",
         password: "test@123",
       },
       validationSchema: formValidationSchema,
@@ -145,6 +146,18 @@ export const LoginPage = () => {
                 >
                   Create Account
                 </Button>
+                <LoginSocialGoogle
+                client_id="995882720525-o6kuj63crufsii6s314njsaov5d0nmiq.apps.googleusercontent.com"
+                access_type="offline"
+                onResolve={(provider, data) => {
+                  console.log(provider, data)
+                }}
+                onReject={(err) => {
+                  console.log(err)
+                }}>
+                  <button type="button">Sign-up with Google</button>
+                </LoginSocialGoogle>
+                
               </CardContent>
             </Card>
           </form>
